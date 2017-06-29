@@ -1,7 +1,9 @@
 FROM python:2.7-alpine
+MAINTAINER Betacloud Solutions GmbH (https://www.betacloud-solutions.de)
 
-ARG BRANCH=v2.0.7
-ARG URL=https://github.com/digitalocean/netbox/archive/$BRANCH.tar.gz
+ARG VERSION
+ENV VERSION ${VERSION:-v2.0.7}
+ARG URL=https://github.com/digitalocean/netbox/archive/$VERSION.tar.gz
 
 RUN apk add --no-cache \
       bash \
@@ -27,9 +29,9 @@ WORKDIR /opt/netbox
 RUN pip install -r requirements.txt \
   && ln -s configuration.docker.py netbox/netbox/configuration.py
 
-COPY docker/gunicorn_config.py /opt/netbox/
-COPY docker/docker-entrypoint.sh /docker-entrypoint.sh
-COPY docker/nginx.conf /etc/netbox-nginx/nginx.conf
+COPY files/gunicorn_config.py /opt/netbox/
+COPY files/docker-entrypoint.sh /docker-entrypoint.sh
+COPY files/nginx.conf /etc/netbox-nginx/nginx.conf
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
