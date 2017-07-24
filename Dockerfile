@@ -19,6 +19,7 @@ RUN apk add --no-cache \
       openssl-dev \
       postgresql-dev \
       wget \
+  && echo "[global]\nindex-url = https://devpi-0.betacloud.io/root/pypi/+simple/\ntrusted-host = devpi-0.betacloud.io" > /etc/pip.conf \
   && pip install gunicorn==17.5 django-auth-ldap
 
 WORKDIR /opt
