@@ -31,10 +31,10 @@ RUN pip install -r requirements.txt \
   && ln -s configuration.docker.py netbox/netbox/configuration.py
 
 COPY files/gunicorn_config.py /opt/netbox/
-COPY files/docker-entrypoint.sh /docker-entrypoint.sh
+COPY files/run.sh /run.sh
 COPY files/nginx.conf /etc/netbox-nginx/nginx.conf
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENTRYPOINT ["/run.sh"]
 
 VOLUME ["/etc/netbox-nginx/"]
 EXPOSE 8001
