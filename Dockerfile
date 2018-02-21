@@ -1,5 +1,5 @@
 FROM python:2.7-alpine
-MAINTAINER Betacloud Solutions GmbH (https://www.betacloud-solutions.de)
+LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
 ENV VERSION ${VERSION:-v2.1.4}
