@@ -2,7 +2,7 @@ FROM python:2.7-alpine
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
-ENV VERSION ${VERSION:-v2.3.1}
+ENV VERSION ${VERSION:-v2.3.3}
 ARG URL=https://github.com/digitalocean/netbox/archive/$VERSION.tar.gz
 
 RUN apk add --no-cache \
