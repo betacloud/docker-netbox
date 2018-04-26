@@ -27,8 +27,10 @@ RUN wget -q -O - "${URL}" | tar xz \
   && ln -s netbox* netbox
 
 WORKDIR /opt/netbox
-RUN pip install -r requirements.txt \
-  && ln -s configuration.docker.py netbox/netbox/configuration.py
+RUN pip install -r requirements.txt
+
+RUN cp netbox/netbox/configuration.example.py /configuration.py \
+  && ln -s /configuration.py netbox/netbox/configuration.py
 
 COPY files/gunicorn_config.py /opt/netbox/
 COPY files/run.sh /run.sh
