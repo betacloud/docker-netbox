@@ -1,32 +1,36 @@
+---
 version: '3'
 services:
-    netbox:
-        build: .
-        image: digitalocean/netbox:v2.0-beta2
-        depends_on:
-        - postgres
-        env_file: netbox.env
-        volumes:
-        - netbox-nginx-config:/etc/netbox-nginx/
-        - netbox-static-files:/opt/netbox/netbox/static
-    nginx:
-        image: nginx:1.11-alpine
-        command: nginx -g 'daemon off;' -c /etc/netbox-nginx/nginx.conf
-        depends_on:
-        - netbox
-        ports:
-        - 80
-        volumes:
-        - netbox-static-files:/opt/netbox/netbox/static
-        - netbox-nginx-config:/etc/netbox-nginx/
-    postgres:
-        image: postgres:9.6-alpine
-        environment:
-            POSTGRES_USER: netbox
-            POSTGRES_PASSWORD: J5brHrAXFLQSif0K
-            POSTGRES_DB: netbox
+  netbox:
+    image: betacloud/netbox:v2.3.3
+    depends_on:
+      - postgres
+    environment:
+      SUPERUSER_NAME: dragon
+      SUPERUSER_EMAIL: operations@betacloud.io
+      SUPERUSER_PASSWORD: password
+    volumes:
+      - ./configuration.py:/configuration.py:ro
+      - netbox-nginx-config:/etc/netbox-nginx/
+      - netbox-static-files:/opt/netbox/netbox/static
+  nginx:
+    image: nginx:1.13-alpine
+    command: nginx -g 'daemon off;' -c /etc/netbox-nginx/nginx.conf
+    depends_on:
+      - netbox
+    ports:
+      - 80
+    volumes:
+      - netbox-static-files:/opt/netbox/netbox/static
+      - netbox-nginx-config:/etc/netbox-nginx/
+  postgres:
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_USER: netbox
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: netbox
 volumes:
-    netbox-static-files:
-        driver: local
-    netbox-nginx-config:
-        driver: local
+  netbox-static-files:
+    driver: local
+  netbox-nginx-config:
+    driver: local
