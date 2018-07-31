@@ -5,7 +5,8 @@ ARG VERSION
 ENV VERSION ${VERSION:-v2.3.3}
 ARG URL=https://github.com/digitalocean/netbox/archive/$VERSION.tar.gz
 
-RUN apk add --no-cache \
+RUN apk update \
+  && apk add --no-cache \
       bash \
       build-base \
       ca-certificates \
