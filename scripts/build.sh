@@ -15,6 +15,7 @@ set -x
 # Set default values
 
 BUILD_OPTS=${BUILD_OPTS:-}
+HASH_REPOSITORY=$(git rev-parse --short HEAD)
 
 # https://github.com/jenkinsci/docker/blob/master/update-official-library.sh
 version-from-dockerfile() {
@@ -26,7 +27,7 @@ if [[ -z $VERSION ]]; then
 fi
 
 docker build \
-    --squash \
     --build-arg "VERSION=$VERSION" \
+    --label "io.osism.${REPOSITORY#osism/}=$HASH_REPOSITORY" \
     --tag "$REPOSITORY:$VERSION" \
     $BUID_OPTS .
