@@ -1,4 +1,4 @@
-FROM python:2.7-alpine
+FROM python:3.6-alpine3.7
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
@@ -12,16 +12,16 @@ RUN apk update \
       ca-certificates \
       cyrus-sasl-dev \
       graphviz \
+      ttf-ubuntu-font-family \
       jpeg-dev \
       libffi-dev \
       libxml2-dev \
       libxslt-dev \
       openldap-dev \
-      openssl-dev \
       postgresql-dev \
       wget \
   && pip install --upgrade pip \
-  && pip install gunicorn==17.5 django-auth-ldap
+  && pip install gunicorn napalm
 
 WORKDIR /opt
 RUN wget -q -O - "${URL}" | tar xz \

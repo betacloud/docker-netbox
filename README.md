@@ -19,7 +19,8 @@ limitations under the License.
 Author information
 ------------------
 
-This docker images was created by [Betacloud Solutions GmbH](https://betacloud-solutions.de).
+This docker images is maintained by [Betacloud Solutions GmbH](https://betacloud-solutions.de)
+and is based on ninech/netbox-docker.
 
 Notices
 -------
