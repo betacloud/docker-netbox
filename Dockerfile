@@ -38,7 +38,9 @@ COPY files/run.sh /run.sh
 COPY files/nginx.conf /etc/netbox-nginx/nginx.conf
 
 WORKDIR /opt/netbox/netbox
+
 ENTRYPOINT ["/run.sh"]
+CMD ["gunicorn", "-c /opt/netbox/gunicorn_config.py", "netbox.wsgi"]
 
 VOLUME ["/etc/netbox-nginx/"]
 EXPOSE 8001
