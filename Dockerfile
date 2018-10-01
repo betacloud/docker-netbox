@@ -1,4 +1,4 @@
-FROM python:3.6-alpine3.7
+FROM python:3.6-alpine3.8
 LABEL maintainer="Betacloud Solutions GmbH (https://www.betacloud-solutions.de)"
 
 ARG VERSION
