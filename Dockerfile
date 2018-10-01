@@ -37,6 +37,7 @@ COPY files/gunicorn_config.py /opt/netbox/
 COPY files/run.sh /run.sh
 COPY files/nginx.conf /etc/netbox-nginx/nginx.conf
 
+WORKDIR /opt/netbox/netbox
 ENTRYPOINT ["/run.sh"]
 
 VOLUME ["/etc/netbox-nginx/"]
