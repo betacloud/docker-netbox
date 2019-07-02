@@ -30,12 +30,10 @@ RUN wget -q -O - "${URL}" | tar xz \
 WORKDIR /opt/netbox
 RUN pip install -r requirements.txt
 
-RUN cp netbox/netbox/configuration.example.py /configuration.py \
-  && ln -s /configuration.py netbox/netbox/configuration.py
-
+COPY files/configuration.py /opt/netbox/netbox/netbox/configuration.py
 COPY files/gunicorn_config.py /opt/netbox/
-COPY files/run.sh /run.sh
 COPY files/nginx.conf /etc/netbox-nginx/nginx.conf
+COPY files/run.sh /run.sh
 
 WORKDIR /opt/netbox/netbox
 
